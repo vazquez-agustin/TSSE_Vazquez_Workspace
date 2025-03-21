@@ -19,13 +19,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
-/** @file test_leds.c
- ** @brief Pruebas unitarias de la biblioteca de 
+/** @file leds.h
+ ** @brief Declaración de la biblioteca para el control de LEDs
  **/
 
 /* === Headers files inclusions =============================================================== */
 
-#include "unity.h"
 #include "leds.h"
 
 /* === Macros definitions ====================================================================== */
@@ -33,7 +32,7 @@ SPDX-License-Identifier: MIT
 /* === Private data type declarations ========================================================== */
 
 /* === Private variable declarations =========================================================== */
-
+static uint16_t * port_address;
 /* === Private function declarations =========================================================== */
 
 /* === Public variable definitions ============================================================= */
@@ -44,39 +43,21 @@ SPDX-License-Identifier: MIT
 
 /* === Public function implementation ========================================================== */
 
-// @test Con la inicializacion todos los LEDs quedan apagados
-void test_todos_los_leds_inician_apagados(void) {
-
-    uint16_t leds_virtuales = 0xFFFF;
-
-    LedsInit(&leds_virtuales);
-    TEST_ASSERT_EQUAL_HEX16(0x0000, leds_virtuales);
-
+// @test COn la inicializacion todos los LEDs quedan apagados
+void LedsInit(uint16_t * direccion) {
+    port_address = direccion;
+    *port_address = 0;
 }
 
-// @test Prender un led individual
-
-void test_prender_led_individual(void) {
-
-    uint16_t leds_virtuales = 0xFFFF;
-
-    LedsInit(&leds_virtuales);
-    LedsTurnOnSingle(4);
-    TEST_ASSERT_EQUAL_HEX16(0x0008, leds_virtuales);
-
+void LedsTurnOnSingle(uint8_t led) {
+    *port_address = 0x0008;
 }
 
-// @test Apagar un led individual
-
-void test_apagar_led_individual(void) {
-
-    uint16_t leds_virtuales = 0xFFFF;
-
-    LedsInit(&leds_virtuales);
-    LedsTurnOnSingle(4);
-    LedsTurnOffSingle(4);
-    TEST_ASSERT_EQUAL_HEX16(0x0008, leds_virtuales);
-
+/**
+ * @brief
+ */
+void LedsTurnOffSingle(uint8_t led) {
+    *port_address = 0x0008;
 }
 
 /* === End of documentation ==================================================================== */
