@@ -28,36 +28,51 @@ SPDX-License-Identifier: MIT
 #include "leds.h"
 
 /* === Macros definitions ====================================================================== */
+/** @brief Mascara para apagar todos los LEDs */
+#define ALL_LEDS_OFF        0x0000
+/** @brief Diferencia entre el numero de led y el numero de bit */
+#define LEDS_TO_BIT_OFFSET  1
+/** @brief Constante con el primer bit en uno para generar una mascara */
+#define LED_ON              1
 
 /* === Private data type declarations ========================================================== */
 
 /* === Private variable declarations =========================================================== */
+/** @brief Variable privada para almacenar la direccion del puerto de salida */
 static uint16_t * port_address;
 /* === Private function declarations =========================================================== */
-
+/** 
+ * @brief Funcion privada para convertir el numero de un led en una mascara de bits
+ * 
+ * @param led Numero de led para el que se desea generar la mascara de bits
+ * @return uint16_t Mascara de bits con 1 en la posicion correspondiente al led
+ */
+static uint16_t LedToMask(uint8_t led);
 /* === Public variable definitions ============================================================= */
 
 /* === Private variable definitions ============================================================ */
 
 /* === Private function implementation ========================================================= */
-
+static uint16_t LedToMask(uint8_t led) {
+    return (LED_ON << (led - LEDS_TO_BIT_OFFSET));
+}
 /* === Public function implementation ========================================================== */
 
 // @test COn la inicializacion todos los LEDs quedan apagados
 void LedsInit(uint16_t * direccion) {
     port_address = direccion;
-    *port_address = 0;
+    *port_address = ALL_LEDS_OFF;
 }
 
 void LedsTurnOnSingle(uint8_t led) {
-    *port_address = 0x0008;
+    *port_address |= LedToMask(led);
 }
 
 /**
  * @brief
  */
 void LedsTurnOffSingle(uint8_t led) {
-    *port_address = 0x0008;
+    *port_address &= ~LedToMask(led);
 }
 
 /* === End of documentation ==================================================================== */

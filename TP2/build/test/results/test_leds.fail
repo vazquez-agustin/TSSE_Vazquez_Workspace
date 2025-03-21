@@ -12,16 +12,20 @@
   :line: 59
   :message: ''
   :unity_test_time: 0
+:failures:
 - :test: test_apagar_led_individual
-  :line: 71
-  :message: ''
+  :line: 78
+  :message: Expected 0x0008 Was 0x0000
   :unity_test_time: 0
-:failures: []
+- :test: test_prender_y_apagar_algunos_leds
+  :line: 95
+  :message: Expected 0x0010 Was 0x0020
+  :unity_test_time: 0
 :ignores: []
 :counts:
-  :total: 3
-  :passed: 3
-  :failed: 0
+  :total: 4
+  :passed: 2
+  :failed: 2
   :ignored: 0
 :stdout: []
-:time: 0.00073515399981261
+:time: 0.000362844999472145
