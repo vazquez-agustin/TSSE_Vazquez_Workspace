@@ -91,4 +91,12 @@ void test_prender_todos_los_leds_de_una_vez(void)
   TEST_ASSERT_EQUAL_HEX16(0xFFFF, ledsVirtuales);
 }
 
+// @test Apagar todos los LEDs de una vez
+void test_apagar_todos_los_leds_de_una_vez(void)
+{
+  turnOnAllLeds();
+  turnOffAllLeds();
+  TEST_ASSERT_EQUAL_HEX16(0x0000, ledsVirtuales);
+}
+
 /* === End of documentation ==================================================================== */

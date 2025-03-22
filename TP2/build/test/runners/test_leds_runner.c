@@ -20,6 +20,7 @@ extern void test_prender_led_individual(void);
 extern void test_apagar_led_individual(void);
 extern void test_prender_y_apagar_algunos_leds(void);
 extern void test_prender_todos_los_leds_de_una_vez(void);
+extern void test_apagar_todos_los_leds_de_una_vez(void);
 
 /*=======Mock Management=====*/
 static void CMock_Init(void)
@@ -105,17 +106,20 @@ int main(int argc, char** argv)
       UNITY_PRINT_EOL();
       UnityPrint("  test_prender_todos_los_leds_de_una_vez");
       UNITY_PRINT_EOL();
+      UnityPrint("  test_apagar_todos_los_leds_de_una_vez");
+      UNITY_PRINT_EOL();
       return 0;
     }
     return parse_status;
   }
 #endif
   UnityBegin("test_leds.c");
-  run_test(test_todos_los_leds_inician_apagados, "test_todos_los_leds_inician_apagados", 53);
+  run_test(test_todos_los_leds_inician_apagados, "test_todos_los_leds_inician_apagados", 54);
   run_test(test_prender_led_individual, "test_prender_led_individual", 63);
-  run_test(test_apagar_led_individual, "test_apagar_led_individual", 71);
-  run_test(test_prender_y_apagar_algunos_leds, "test_prender_y_apagar_algunos_leds", 80);
-  run_test(test_prender_todos_los_leds_de_una_vez, "test_prender_todos_los_leds_de_una_vez", 91);
+  run_test(test_apagar_led_individual, "test_apagar_led_individual", 70);
+  run_test(test_prender_y_apagar_algunos_leds, "test_prender_y_apagar_algunos_leds", 78);
+  run_test(test_prender_todos_los_leds_de_una_vez, "test_prender_todos_los_leds_de_una_vez", 88);
+  run_test(test_apagar_todos_los_leds_de_una_vez, "test_apagar_todos_los_leds_de_una_vez", 95);
 
   return UNITY_END();
 }

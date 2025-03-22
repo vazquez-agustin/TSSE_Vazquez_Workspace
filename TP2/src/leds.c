@@ -65,7 +65,7 @@ static uint16_t LedToMask(uint8_t led)
 void LedsInit(uint16_t* direccion)
 {
   port_address = direccion;
-  *port_address = ALL_LEDS_OFF;
+  turnOffAllLeds();
 }
 
 void LedsTurnOnSingle(uint8_t led)
@@ -84,6 +84,11 @@ void LedsTurnOffSingle(uint8_t led)
 void turnOnAllLeds()
 {
   *port_address = ALL_LEDS_ON;
+}
+
+void turnOffAllLeds()
+{
+  *port_address = ALL_LEDS_OFF;
 }
 
 /* === End of documentation ==================================================================== */
