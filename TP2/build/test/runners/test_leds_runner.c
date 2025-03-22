@@ -23,6 +23,8 @@ extern void test_prender_todos_los_leds_de_una_vez(void);
 extern void test_apagar_todos_los_leds_de_una_vez(void);
 extern void test_consultar_el_estado_de_un_led_encendido(void);
 extern void test_consultar_el_estado_de_un_led_apagado(void);
+extern void test_revisar_limite_inferior(void);
+extern void test_revisar_limite_superior(void);
 
 /*=======Mock Management=====*/
 static void CMock_Init(void)
@@ -114,6 +116,10 @@ int main(int argc, char** argv)
       UNITY_PRINT_EOL();
       UnityPrint("  test_consultar_el_estado_de_un_led_apagado");
       UNITY_PRINT_EOL();
+      UnityPrint("  test_revisar_limite_inferior");
+      UNITY_PRINT_EOL();
+      UnityPrint("  test_revisar_limite_superior");
+      UNITY_PRINT_EOL();
       return 0;
     }
     return parse_status;
@@ -130,6 +136,8 @@ int main(int argc, char** argv)
            "test_consultar_el_estado_de_un_led_encendido", 103);
   run_test(test_consultar_el_estado_de_un_led_apagado, "test_consultar_el_estado_de_un_led_apagado",
            110);
+  run_test(test_revisar_limite_inferior, "test_revisar_limite_inferior", 118);
+  run_test(test_revisar_limite_superior, "test_revisar_limite_superior", 125);
 
   return UNITY_END();
 }
