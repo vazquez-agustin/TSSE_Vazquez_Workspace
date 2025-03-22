@@ -114,6 +114,8 @@ void test_consultar_el_estado_de_un_led_apagado(void)
   TEST_ASSERT_EQUAL(true, isLedOff(4));
 }
 
+/*------------------------------------------------------*/
+
 // @test Revisar limite inferior de los parametros
 void test_revisar_limite_inferior(void)
 {
@@ -127,4 +129,18 @@ void test_revisar_limite_superior(void)
   LedsTurnOnSingle(16);
   TEST_ASSERT_EQUAL_HEX16(0x8000, ledsVirtuales);
 }
+
+/*------------------------------------------------------*/
+
+// @test Revisar parametros fuera de los limites
+void test_revisar_fuera_limite_inferior(void)
+{
+  LedsTurnOnSingle(-1);
+  TEST_ASSERT_EQUAL_HEX16(0x0000, ledsVirtuales);
+  LedsTurnOnSingle(0);
+  TEST_ASSERT_EQUAL_HEX16(0x0000, ledsVirtuales);
+  LedsTurnOnSingle(17);
+  TEST_ASSERT_EQUAL_HEX16(0x0000, ledsVirtuales);
+}
+
 /* === End of documentation ==================================================================== */

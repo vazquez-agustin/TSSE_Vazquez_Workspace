@@ -37,19 +37,23 @@
   :message: ''
   :unity_test_time: 0
 - :test: test_revisar_limite_inferior
-  :line: 118
+  :line: 120
   :message: ''
   :unity_test_time: 0
 - :test: test_revisar_limite_superior
-  :line: 125
+  :line: 127
+  :message: ''
+  :unity_test_time: 0
+- :test: test_revisar_fuera_limite_inferior
+  :line: 136
   :message: ''
   :unity_test_time: 0
 :failures: []
 :ignores: []
 :counts:
-  :total: 10
-  :passed: 10
+  :total: 11
+  :passed: 11
   :failed: 0
   :ignored: 0
 :stdout: []
-:time: 0.000528017999840813
+:time: 0.0004749689996970119

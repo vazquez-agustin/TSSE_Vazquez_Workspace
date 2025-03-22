@@ -36,6 +36,10 @@ SPDX-License-Identifier: MIT
 #define LEDS_TO_BIT_OFFSET 1
 /** @brief Constante con el primer bit en uno para generar una mascara */
 #define LED_ON 1
+/** @brief Constante que representa el primer led */
+#define FIRST_LED 1
+/** @brief Constante que representa el ultimo led */
+#define LAST_LED 16
 
 /* === Private data type declarations ========================================================== */
 
@@ -50,6 +54,15 @@ static uint16_t* port_address;
  * @return uint16_t Mascara de bits con 1 en la posicion correspondiente al led
  */
 static uint16_t LedToMask(uint8_t led);
+
+/**
+ * @brief Funcion privada para verificar los limites de los leds
+ *
+ * @param led Numero de led a verificar
+ * @return bool Devuelve TRUE cuando el led supera uno de los limites y FALSE en caso de que este en
+ * el rango
+ */
+static bool IsLedOutOfBound(uint8_t led);
 /* === Public variable definitions ============================================================= */
 
 /* === Private variable definitions ============================================================ */
@@ -68,16 +81,26 @@ void LedsInit(uint16_t* direccion)
   turnOffAllLeds();
 }
 
+bool IsLedOutOfBound(uint8_t led)
+{
+  return (led < FIRST_LED || led > LAST_LED);
+}
+
 void LedsTurnOnSingle(uint8_t led)
 {
+  if(IsLedOutOfBound(led))
+  {
+    return;
+  }
   *port_address |= LedToMask(led);
 }
 
-/**
- * @brief
- */
 void LedsTurnOffSingle(uint8_t led)
 {
+  if(IsLedOutOfBound(led))
+  {
+    return;
+  }
   *port_address &= ~LedToMask(led);
 }
 
@@ -93,6 +116,10 @@ void turnOffAllLeds()
 
 bool isLedOn(uint8_t led)
 {
+  if(IsLedOutOfBound(led))
+  {
+    return false;
+  }
   return (*port_address & LedToMask(led)) != 0;
 }
 
