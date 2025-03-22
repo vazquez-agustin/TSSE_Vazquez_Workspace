@@ -96,4 +96,9 @@ bool isLedOn(uint8_t led)
   return (*port_address & LedToMask(led)) != 0;
 }
 
+bool isLedOff(uint8_t led)
+{
+  return !isLedOn(led);
+}
+
 /* === End of documentation ==================================================================== */
