@@ -91,4 +91,9 @@ void turnOffAllLeds()
   *port_address = ALL_LEDS_OFF;
 }
 
+bool isLedOn(uint8_t led)
+{
+  return (*port_address & LedToMask(led)) != 0;
+}
+
 /* === End of documentation ==================================================================== */
