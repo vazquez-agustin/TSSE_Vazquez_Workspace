@@ -1,5 +1,5 @@
 /************************************************************************************************
-Copyright (c) 2023, Esteban Volentini <evolentini@herrera.unt.edu.ar>
+Copyright (c) 2025, Agustin Jesus Vazquez <vazqueza193@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -19,8 +19,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
-/** @file leds.h
- ** @brief Declaración de la biblioteca para el control de LEDs
+/** @file leds.c
+ ** @brief Definición de la biblioteca para el control de LEDs
  **/
 
 /* === Headers files inclusions =============================================================== */
@@ -29,21 +29,23 @@ SPDX-License-Identifier: MIT
 
 /* === Macros definitions ====================================================================== */
 /** @brief Mascara para apagar todos los LEDs */
-#define ALL_LEDS_OFF        0x0000
+#define ALL_LEDS_OFF 0x0000
+/** @brief Mascara para prender todos los LEDs */
+#define ALL_LEDS_ON 0xFFFF
 /** @brief Diferencia entre el numero de led y el numero de bit */
-#define LEDS_TO_BIT_OFFSET  1
+#define LEDS_TO_BIT_OFFSET 1
 /** @brief Constante con el primer bit en uno para generar una mascara */
-#define LED_ON              1
+#define LED_ON 1
 
 /* === Private data type declarations ========================================================== */
 
 /* === Private variable declarations =========================================================== */
 /** @brief Variable privada para almacenar la direccion del puerto de salida */
-static uint16_t * port_address;
+static uint16_t* port_address;
 /* === Private function declarations =========================================================== */
-/** 
+/**
  * @brief Funcion privada para convertir el numero de un led en una mascara de bits
- * 
+ *
  * @param led Numero de led para el que se desea generar la mascara de bits
  * @return uint16_t Mascara de bits con 1 en la posicion correspondiente al led
  */
@@ -53,26 +55,35 @@ static uint16_t LedToMask(uint8_t led);
 /* === Private variable definitions ============================================================ */
 
 /* === Private function implementation ========================================================= */
-static uint16_t LedToMask(uint8_t led) {
-    return (LED_ON << (led - LEDS_TO_BIT_OFFSET));
+static uint16_t LedToMask(uint8_t led)
+{
+  return (LED_ON << (led - LEDS_TO_BIT_OFFSET));
 }
 /* === Public function implementation ========================================================== */
 
-// @test COn la inicializacion todos los LEDs quedan apagados
-void LedsInit(uint16_t * direccion) {
-    port_address = direccion;
-    *port_address = ALL_LEDS_OFF;
+// @test Con la inicializacion todos los LEDs quedan apagados
+void LedsInit(uint16_t* direccion)
+{
+  port_address = direccion;
+  *port_address = ALL_LEDS_OFF;
 }
 
-void LedsTurnOnSingle(uint8_t led) {
-    *port_address |= LedToMask(led);
+void LedsTurnOnSingle(uint8_t led)
+{
+  *port_address |= LedToMask(led);
 }
 
 /**
  * @brief
  */
-void LedsTurnOffSingle(uint8_t led) {
-    *port_address &= ~LedToMask(led);
+void LedsTurnOffSingle(uint8_t led)
+{
+  *port_address &= ~LedToMask(led);
+}
+
+void turnOnAllLeds()
+{
+  *port_address = ALL_LEDS_ON;
 }
 
 /* === End of documentation ==================================================================== */

@@ -33,27 +33,55 @@ SPDX-License-Identifier: MIT
 /* === Cabecera C++ ============================================================================ */
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-/* === Public macros definitions =============================================================== */
+  /* === Public macros definitions ===============================================================
+   */
 
-/* === Public data type declarations =========================================================== */
+  /* === Public data type declarations ===========================================================
+   */
 
-/* === Public variable declarations ============================================================ */
+  /* === Public variable declarations ============================================================
+   */
 
-/* === Public function declarations ============================================================ */
+  /* === Public function declarations ============================================================
+   */
 
-/**
- * @brief Función para inicializar 
- *
- * @return int Valor de retorno, cero si esta todo bien, negativo si hay un error
- */
-void LedsInit(uint16_t * direccion);
-void LedsTurnOnSingle(uint8_t led);
-void LedsTurnOffSingle(uint8_t led);
+  /**
+   * @brief Función para inicializar
+   *
+   * @return int Valor de retorno, cero si esta todo bien, negativo si hay un error
+   */
+  void LedsInit(uint16_t* direccion);
 
-/* === End of documentation ==================================================================== */
+  /**
+   * @brief Función para encender un led especifico
+   *
+   * @param led numero de led a encender. Rango de 1 a 16.
+   * @return void
+   */
+  void LedsTurnOnSingle(uint8_t led);
+
+  /**
+   * @brief Función para apagar un led especifico
+   *
+   * @param led numero de led a encender. Rango de 1 a 16.
+   * @return void
+   */
+  void LedsTurnOffSingle(uint8_t led);
+
+  /**
+   * @brief Función para prender todos leds
+   *
+   * @param void
+   * @return void
+   */
+  void turnOnAllLeds();
+
+  /* === End of documentation ====================================================================
+   */
 
 #ifdef __cplusplus
 }
