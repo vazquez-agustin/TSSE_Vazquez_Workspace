@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - 'TP02/**'   # Se activa solo si se modifican archivos dentro de TP02
+      - 'TP2/**'   # Se activa solo si se modifican archivos dentro de TP02
 
 permissions:
   contents: read
@@ -39,7 +39,7 @@ jobs:
         uses: pre-commit/action@v3.0.0
 
       - name: Run Unit Tests
-        working-directory: TP02   # Se establece el directorio de trabajo en TP02
+        working-directory: TP2   # Se establece el directorio de trabajo en TP2
         run: ceedling clobber gcov:all
 
       - name: Test Results Report
@@ -47,13 +47,13 @@ jobs:
         if: success() || failure()
         with:
           name: Ceedling Unit Tests
-          path: TP02/build/artifacts/gcov/junit_tests_report.xml   # Ruta ajustada a TP02
+          path: TP2/build/artifacts/gcov/junit_tests_report.xml   # Ruta ajustada a TP2
           reporter: jest-junit
 
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          filename: TP02/build/artifacts/gcov/gcovr/GcovCoverageCobertura.xml   # Ruta ajustada a TP02
+          filename: TP2/build/artifacts/gcov/gcovr/GcovCoverageCobertura.xml   # Ruta ajustada a TP2
           badge: true
           format: markdown
           hide_branch_rate: false
