@@ -35,6 +35,10 @@ jobs:
       - name: Install pre-commit
         run: pip install pre-commit
 
+      - name: Debug clang-format config
+        run: cat TP2/.clang-format
+
+
       - name: Run Format Validations (Pre-commit in TP2)
         run: |
           cd TP2
